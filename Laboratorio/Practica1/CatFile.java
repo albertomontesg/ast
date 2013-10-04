@@ -12,11 +12,10 @@ public class CatFile {
 			// Initialize with the standard Input/OutputStream from computer: keyboard and console.
             in = new FileReader("/dev/tty");
             out = new FileWriter("/dev/tty");
-            char[] chars = new char[32];
+            int c;
 			
-			while (true) {
-				in.read(chars);
-				out.write(chars);
+			while ((c = in.read()) != -1) {
+				out.write((char) c);
 				out.flush();
 			}
 			
