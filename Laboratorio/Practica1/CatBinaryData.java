@@ -3,6 +3,12 @@ import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 
+/**
+ * @author Alberto Montes
+ * @subject AST
+ * @exercise Practica1: Apartat 3
+ * cat fent servir DataInputStream/DataOutputStream
+ */
 public class CatBinaryData {
     public static void main(String[] args) throws IOException {
 
@@ -15,11 +21,13 @@ public class CatBinaryData {
             out = new DataOutputStream(System.out);
             int c;
 
-            while ((c = in.readInt()) != -1) {
-				out.writeChar((char) c);
-				out.flush();
+            // Reads the input data as a binary int and transforms it to a char while does not found the EOF
+            while (true) {
+				out.writeChar(in.readChar());
+				out.flush(); // Completly necessary to flush the buffer, if not, the data will print when we close the stream (closing flush)
             }
         } catch(EOFException e) {
+        	
 			if (in != null) {
                 in.close();
             }

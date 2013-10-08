@@ -1,6 +1,7 @@
 /**
  * @author Alberto Montes
  * @subject AST
+ * @exercise Practica3: Queues
  * The Queue class represents a first-in-first-out (FIFO) queue of objects.
  */
 class Queue<E> {

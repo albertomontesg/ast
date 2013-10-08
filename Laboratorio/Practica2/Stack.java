@@ -1,6 +1,7 @@
 /**
  * @author Alberto Montes
  * @subject AST
+ * @exercise Practica2: Stacks
  * The Stack class represents a last-in-first-out (LIFO) stack of objects.
  */
 class Stack<E> {
