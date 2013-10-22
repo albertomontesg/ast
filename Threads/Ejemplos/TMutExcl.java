@@ -1,9 +1,7 @@
 class Puerta extends Thread {
     private int id;
-    private Integer cuenta;
     
-    public Puerta(Integer cuenta, int id) {
-    	this.cuenta = cuenta;
+    public Puerta(int id) {
     	this.id = id;
     }
     
@@ -16,7 +14,7 @@ class Puerta extends Thread {
         	System.out.println("Puerta(" + id + ") about to enter CZ");
 
         	/* CZ */
-        	temp = cuenta.intValue();	/* Sentencia 1 */
+        	temp = TMultExcl.cuenta;	/* Sentencia 1 */
 			try {
               sleep(10);
             } catch(InterruptedException e) {
@@ -26,7 +24,7 @@ class Puerta extends Thread {
               sleep (10);
             } catch(InterruptedException e) {
             }
-			cuenta = new Integer(temp);	/* Sentencia 3 */
+			TMultExcl.cuenta = temp;	/* Sentencia 3 */
 			try {
               sleep (10);
             } catch(InterruptedException e) {
@@ -40,16 +38,17 @@ class Puerta extends Thread {
 }
   
 public class TMutExcl {
+	static int cuenta = 0;
+	
     public static void main(String[] args) {
-    	Integer cuenta = 0;
     	final int M = 2;
       
-    	System.out.println("main: INITIAL VALUE: cuenta = " + cuenta.intValue());
+    	System.out.println("main: INITIAL VALUE: cuenta = " + cuenta);
 		
 		/* start M Puerta threads */
 		Puerta[] p = new Puerta[M];
 		for (int i = 0; i < M; i++) {
-			p[i] = new Puerta(cuenta, i);
+			p[i] = new Puerta(i);
 			p[i].start();
 		}
       
@@ -60,7 +59,7 @@ public class TMutExcl {
             } catch(InterruptedException e) {
             }
         }
-		System.out.println("main: FINAL VALUE: cuenta = " + cuenta.intValue());
+		System.out.println("main: FINAL VALUE: cuenta = " + cuenta);
 	}
 }
 

@@ -45,10 +45,4 @@ public class MyPrintWriter extends PrintWriter{
 		super.println();
 	}
 	
-	public static void main(String[] args) {
-		int num = 1234567890;
-		// Print num with the previous methods designed
-		new MyPrintWriter().println(num);
-	}
-	
 }

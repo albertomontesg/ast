@@ -10,18 +10,11 @@ import static java.lang.System.out;
  * @exercise Practica4: Threads // Apartat 2
  * As i Bs intercalades amb sleep
  */
-public class ExecutionThreadsSleep {
-	public static void main(String[] args) {
-		// Creation of two threads which each one will print a different character
-		new Thread(new MyRunnableSleep('A')).start();
-		new Thread(new MyRunnableSleep('B')).start();
-	}
-}
 
 /**
  * Class implementing Runnable which will print the character passed through the constructor
  */
-class MyRunnableSleep implements Runnable {
+public class MyRunnableSleep implements Runnable {
 	private char c;
 	
 	public MyRunnableSleep (char c) {

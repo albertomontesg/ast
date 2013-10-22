@@ -10,21 +10,12 @@ import static java.lang.System.out;
  * @exercise Practica4: Threads // Apartat 3
  * As i Bs intercalades amb una variable compartida
  */
-public class ExecutionThreadsShared {
-	public static void main(String[] args) {
-		// Declaration of the shared variable Flag
-		Flag flag = new Flag();
-		new Thread(new MyRunnableShared('A', flag)).start();
-		new Thread(new MyRunnableShared('B', flag)).start();
-	}
-	
-}
 
 /**
  * A class implementing runnable with a shared variable and the process consists on
  * printing a letter on the output
  */
-class MyRunnableShared implements Runnable {
+public class MyRunnableShared implements Runnable {
 	private char ch;
 	private Flag flag;
 	
