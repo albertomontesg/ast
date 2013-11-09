@@ -1,8 +1,10 @@
+import static java.lang.System.out;
+
 /**
  * @author Alberto Montes
  * @subject AST
  * @exercise Practica5: Productors/Consumidors
- * The CiruclarQueue class ...
+ * The CiruclarQueue class is the requested by the statement
  */
 class CircularQueue<E> {
 	// Atribute with the size of the Queue
@@ -26,19 +28,36 @@ class CircularQueue<E> {
 	
 	// Put an element into the Queue
 	public void put (E putValue) {
-		if (size == num) throw new FullQueueException();
+		if (size == num) {
+			out.println(Thread.currentThread().getName() + ": found queue full");
+			throw new FullQueueException();
+		}
 		elements[last] = putValue;
 		last = (last + 1) % size;
 		num++;
+		
+		// Print the trace of the executation
+		synchronized(this) { // Synchronized is used to see the current state of the queue and protect of changing from other threads
+			out.println(Thread.currentThread().getName() + ": put " + putValue.toString() + "--> " + this.toString());
+		}
 	}
 	
 	// Return the first element put into the Queue
 	public E get() {
 		E element;
-		if (0 == num) throw new EmptyQueueException();
+		if (0 == num) {
+			out.println(Thread.currentThread().getName() + ": found queue empty");
+			throw new EmptyQueueException();
+		}
 		element = elements[first];
 		first = (first + 1) % size;
 		num--;
+		
+		// Print the trace of the executation
+		synchronized (this) { // Synchronized is used to see the current state of the queue and protect of changing from other threads
+			out.println(Thread.currentThread().getName() + ": get " + element.toString() + "<-- " + this.toString());
+		}
+		
 		return element;
 	}
 	
@@ -61,13 +80,13 @@ class CircularQueue<E> {
 	@Override
 	public String toString() {
 		String st = "[";
+		int i;
+		int l = first;
 		
-		for (int i = 0; i < size; i++) {
-			if (last < size)
-				st += (i > last && i <= first) ? " -" : elements[i] + " ";
-			else
-				st += (i >= first && i < last) ? elements[i] + " " : "- ";
-		}
+		for(i = 0; i < num; i++) {
+			st += elements[l] + " ";
+			l = (l + 1) % size;
+		} for(i = num ; i < size; i++) st+="- ";
 		
 		st += "]";
 		return st;

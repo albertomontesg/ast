@@ -2,12 +2,14 @@
  * @author Alberto Montes
  * @subject AST
  * @exercise Practica5: Productors/Consumidors
- * ...
+ * The Buffer class is the requested by the statement as a native monitor of Java
  */
 class Buffer<E> {
 	
+	// Encapsulate a CircularQueue
 	private CircularQueue<E> circularQueue;
 	
+	// Constructors...
 	public Buffer() {
 		this.circularQueue = new CircularQueue<E>();
 	}
@@ -16,6 +18,9 @@ class Buffer<E> {
 		this.circularQueue = new CircularQueue<E>(size);
 	}
 	
+	/* I make the put method synchronized to protect the current state of the monitor (Buffer)
+	 * from possible threads to also call this method
+	 */
 	public synchronized void put(E element) {
 		while (circularQueue.isFull()) {
 			try {wait();} 
@@ -23,12 +28,13 @@ class Buffer<E> {
 		}
 		circularQueue.put(element);
 		
-		// Print the trace of the executation
-		System.out.println(Thread.currentThread().getName() + ": put " + element.toString() + "--> " + this.toString());
-		
+		// Notify the threads that have been blocked by the initial condition
 		notifyAll();
 	}
 	
+	/* I make the get method synchronized to protect the current state of the monitor (Buffer)
+	 * from possible threads to also call this method
+	 */
 	public synchronized E get() {
 		while (circularQueue.isEmpty()) {
 			try {wait();} 
@@ -36,13 +42,12 @@ class Buffer<E> {
 		}
 		E element = circularQueue.get();
 		
-		// Print the trace of the executation
-		System.out.println(Thread.currentThread().getName() + ": get " + element.toString() + "<-- " + this.toString());
-		
+		// Notify the threads that have been blocked by the initial condition
 		notifyAll();
 		return element;
 	}
 	
+	// Returns a String of the current state of the Buffer
 	@Override
 	public synchronized String toString() {
 		return circularQueue.toString();

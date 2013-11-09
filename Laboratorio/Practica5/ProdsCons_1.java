@@ -36,7 +36,7 @@ public class ProdsCons_1 {
 }
 
 /**
- * Class implementing Runnable ...
+ * Class implementing Runnable which has got the code to run the Productors
  */
 class ProductorQueue implements Runnable {
 	private int id;
@@ -53,15 +53,14 @@ class ProductorQueue implements Runnable {
 			Integer num = new Integer(id*ProdsCons_1.NUM_ELEMENTS + i);
 			try {
 				circularQueue.put(num);
-				out.println("P[" + id + "] put " + num.intValue() + "--> " + circularQueue.toString());
 			}
-			catch(FullQueueException e) {out.println("P[" + id + "] found queue full");}
+			catch(FullQueueException e) {}
 		}
 	}
 }
 
 /**
- * Class implementing Runnable ...
+ * Class implementing Runnable which has got the code to run the Consumidor
  */
 class ConsumidorQueue implements Runnable {
 	private int id;
@@ -77,9 +76,8 @@ class ConsumidorQueue implements Runnable {
 		for (int i = 0; i < ProdsCons_1.NUM_ELEMENTS; i++) {
 			try {
 				Integer num = circularQueue.get();
-				out.println("C[" + id + "] get " + num.intValue() + "<-- " + circularQueue.toString());
 			}
-			catch(EmptyQueueException e) {out.println("C[" + id + "] found queue empty");}
+			catch(EmptyQueueException e) {}
 		}
 	}
 }

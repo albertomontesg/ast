@@ -36,7 +36,7 @@ public class ProdsCons_2 {
 }
 
 /**
- * Class implementing Runnable ...
+ * Class implementing Runnable which has got the code to run the Productors
  */
 class ProductorBuffer implements Runnable {
 	private int id;
@@ -57,7 +57,7 @@ class ProductorBuffer implements Runnable {
 }
 
 /**
- * Class implementing Runnable ...
+ * Class implementing Runnable which has got the code to run the Consumidors
  */
 class ConsumidorBuffer implements Runnable {
 	private int id;
