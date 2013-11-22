@@ -7,7 +7,7 @@ import util.WriteCircularByteBuffer;
 
 public class RawOutputStream extends OutputStream {
 
-  MySocket socket ;
+  MySocket socket;
   WriteCircularByteBuffer writeBuffer;
 
   public RawOutputStream( MySocket socket ){

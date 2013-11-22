@@ -7,24 +7,22 @@ import static java.lang.System.out;
  * @author Alberto Montes
  * @date 10-nov-2013
  * @subject AST
- * @exercise Practica7: Implementacio de Protocols // Sessio 1.1
+ * @exercise Practica7: Implementacio de Protocols // Sessio 1
  * Implementation of a reliable data transmission protocol
  */
 public class ChannelIP {
-    private static final double LOSS_PROBABILITY = 0;
-    private static final double ERROR_PROBABILITY = 0;
+    private static final double LOSS_PROBABILITY = 0.3;
+    private static final double ERROR_PROBABILITY = 0.3;
 	
 	// Buffer with which the channel will be simulated
 	private Buffer<TSMessage> buffer;
-	public int id;
 
 	public ChannelIP() {
 		this.buffer = new Buffer<TSMessage>();
 	}
 	
-	public ChannelIP(int capacity, int id){
+	public ChannelIP(int capacity){
 		this.buffer = new Buffer<TSMessage>(capacity);
-		this.id = id;
     }
 	
 	/** Get the packet from the buffer and check if it has an error or is lost.

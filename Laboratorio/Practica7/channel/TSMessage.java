@@ -1,12 +1,10 @@
-package channel;
-
-import java.io.*;
+package channel ;
 
 /**
  * @author Alberto Montes
  * @date 10-nov-2013
  * @subject AST
- * @exercise Practica7: Implementacio de Protocols // Sessio 1.1
+ * @exercise Practica7: Implementacio de Protocols // Sessio 1
  * Implementation of a reliable data transmission protocol
  */
 public class TSMessage {
@@ -59,12 +57,7 @@ public class TSMessage {
 		st += (syn) ? "1" : "0";
 		st += (fin) ? "1" : "0";
 		
-		st += " SeqNum: " + seqnum + " AckNum: " + acknum + " Checksum: " + checksum;
-		if (data != null) {
-			try{st += " Data: "+ (new String(data, "UTF-8"));} catch(Exception e) {}
-			st += " Data size: " + data.length + " bytes";
-		}
-		
+		st += " SeqNum: " + seqnum + " AckNum: " + acknum + " Checksum: " + checksum + " Data size: " + data.length + " bytes";
 		return st;
 	}
 	
