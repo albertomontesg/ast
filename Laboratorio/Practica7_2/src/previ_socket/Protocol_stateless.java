@@ -43,7 +43,7 @@ public class Protocol_stateless implements Protocol {
 
         //***************************************
         
-    	TSMessage message = new TSMessage(0, 0, 0, data, data_length);
+    	TSMessage message = new TSMessage(8, 0, 0, data, data_length);
     	System.out.println("Send from side: " + tx_channel.id + "\tPacket: " + message.toString());
     	tx_channel.send(message);
         
@@ -73,17 +73,16 @@ public class Protocol_stateless implements Protocol {
         	}
         	else notify();
         }
-        else {
-        	//if (message != null)		// TX_Channel returns null when it close
-        		//System.out.println("Received from side: " + tx_channel.id + "\tPacket: " + message.toString());
+        else if(message.psh) {
         	inputStream.write(message.data, 0, message.data.length);
         }
 		
     }
-
+    
     public synchronized void close() {
     	
         //***************************************
+    	
         
         TSMessage fin = new TSMessage(1, 0, 0, new byte[0], 0);
         tx_channel.send(fin);

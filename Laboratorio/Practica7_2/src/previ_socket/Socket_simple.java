@@ -13,9 +13,10 @@ public class Socket_simple {
 
     public Socket_simple(ChannelIP tx_channel, ChannelIP rx_channel) {
         
-    	inputStream = new RawInputStream(128);
+    	inputStream = new RawInputStream(256);
     	protocol = new Protocol_stateless(tx_channel, inputStream);
     	IP_receiver = new IPReceiver(rx_channel, protocol);
+    	IP_receiver.start();
 		
     }
 
@@ -48,8 +49,9 @@ public class Socket_simple {
     }
 
     public int read(byte[] buffer, int offset, int count) throws IOException {
-        
-		return inputStream.read(buffer, offset, count);
+        int d = inputStream.read(buffer, offset, count);
+        if (d == 0) return -1;
+        else return d;
 		
     }
 }

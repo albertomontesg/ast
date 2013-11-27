@@ -56,7 +56,31 @@ public class TransportAlternatingBitProtocol extends Protocol {
 	}
 	
 	public synchronized void received(TSegment seg) {
-		
+		switch (state) {
+			case LISTEN:
+				// assert(seg.syn)
+				// set SYN_RCV
+				// send syn.ack && syn.syn seg
+				
+			case SYN_SENT:
+				// assert(seg.syn && seg.ack)
+				// set ESTABISHED
+				// send ack seg
+				// timeout = false
+				// notify()
+			case SYN_RECV:
+				// assert(seg.ack || seg.syn || seg.psh)
+				if (seg.syn) {
+					// send syn+ack seg
+				} esle {
+					// set ESTABLISHED
+					// notify() server
+					Log.info("TransportAlternatingBitProtocol:received: SYN_RCV -> ESTABLISHED");
+					// fall-through if needed
+				}
+			case ESTABLISHED:
+				/**TODO: Completar*/
+		}
 	}
 	
 	public synchronized void close() {
