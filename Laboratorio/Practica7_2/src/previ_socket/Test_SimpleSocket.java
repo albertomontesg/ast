@@ -2,6 +2,13 @@ package previ_socket;
 
 import channel.ChannelIP;
 
+/**
+ * @author Alberto Montes
+ * @date 20-nov-2013
+ * @subject AST
+ * @exercise Practica7: Implementacio de Protocols // Sessio 1.2 Implementation
+ *           of a reliable data transmission protocol
+ */
 public class Test_SimpleSocket {
 
     public static void main(String[] args) {

@@ -2,10 +2,10 @@ package channel;
 
 /**
  * @author Alberto Montes
- * @date 10-nov-2013
+ * @date 20-nov-2013
  * @subject AST
- * @exercise Practica7: Implementacio de Protocols // Sessio 1.1
- * Implementation of a reliable data transmission protocol
+ * @exercise Practica7: Implementacio de Protocols // Sessio 1.2 Implementation
+ *           of a reliable data transmission protocol
  */
 public class TSMessage {
     
@@ -47,7 +47,6 @@ public class TSMessage {
 	}
 	
 	// Method to print a trace with the information of the packet
-	@Override
 	public String toString() {
 		String st = "Flags: ";
 		

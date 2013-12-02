@@ -5,10 +5,10 @@ import static java.lang.System.out;
 
 /**
  * @author Alberto Montes
- * @date 10-nov-2013
+ * @date 20-nov-2013
  * @subject AST
- * @exercise Practica7: Implementacio de Protocols // Sessio 1.1
- * Implementation of a reliable data transmission protocol
+ * @exercise Practica7: Implementacio de Protocols // Sessio 1.2 Implementation
+ *           of a reliable data transmission protocol
  */
 public class ChannelIP {
     private static final double LOSS_PROBABILITY = 0;

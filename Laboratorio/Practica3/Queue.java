@@ -11,7 +11,7 @@ class Queue<E> {
 	private int first, last, num;
 	//
 	private E[] elements;
-	
+
 	// Constructor. By default it creates a Queue of 32 elements
 	public Queue() {
 		this(32);

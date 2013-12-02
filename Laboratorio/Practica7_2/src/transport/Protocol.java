@@ -4,10 +4,12 @@ import channel.TSMessage;
 
 
 /**
- *
- * @author juanluis
+ * @author Alberto Montes
+ * @date 20-nov-2013
+ * @subject AST
+ * @exercise Practica7: Implementacio de Protocols // Sessio 1.2 Implementation
+ *           of a reliable data transmission protocol
  */
-
 public interface Protocol {
 	void connect();
 	void accept();
