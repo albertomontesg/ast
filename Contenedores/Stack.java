@@ -19,7 +19,6 @@ class Stack<E> {
 	@SuppressWarnings("unchecked")
 	public Stack(int s) {
 		size = s > 0 ? s : 32;
-		top = -1;
 
 		elements = (E[]) new Object[size]; // Create array of generic objects
 	}
@@ -29,20 +28,24 @@ class Stack<E> {
 		if (top == size - 1) // In case the Stack is full
 			throw new FullStackException(String.format("Stack is full, cannot push %s", pushValue));
 
-		elements[++top] = pushValue; // Place pushValue on Stack
+		elements[top++] = pushValue; // Place pushValue on Stack
 	}
 
 	// Return the element of the top of the Stack
 	public E pop() {
-		if (top == -1) // In case the stack is empty
+		if (top == 0) // In case the stack is empty
 			throw new EmptyStackException("Stack is empty, cannot pop");
 
-		return elements[top--]; // Remove and return top element of Stack
+		return elements[--top]; // Remove and return top element of Stack
 	}
 	
 	// Count how many elements are at the Stack
 	public int count() {
-		return top + 1;
+		return top;
+	}
+	
+	public Iterator<E> iterator() {
+		return new StackIterator<E>(this);
 	}
 }
 
@@ -71,5 +74,27 @@ class FullStackException extends RuntimeException {
 
 	public FullStackException(String exception) {
 		super(exception);
+	}
+}
+
+class StackIterator<E> implements Iterator<E> {
+	Stack<E> stack;
+	int actual, num;
+	
+	public StackIterator(Stack<E> stack) {
+		this.stack = stack;
+		actual = 0;
+		num = stack.top;
+	}
+	
+	public E next() {
+		if(!hasNext()) throw new NoSuchElementException();
+		E r = stack.elements[actual++];
+		num--;
+		return r;
+	}
+	
+	public boolean hasNext() {
+		return num > 0;
 	}
 }

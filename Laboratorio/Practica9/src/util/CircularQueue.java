@@ -1,24 +1,27 @@
+package util;
+
 /**
  * @author Alberto Montes
+ * @date 2-dec-2013
  * @subject AST
- * The Queue class represents a first-in-first-out (FIFO) queue of objects.
+ * @exercise Practica8: Implementacio de Protocols // Part 2
+ * 			Reliable transmission over a totally reliable channel
  */
-class Queue<E> implements Iterable<E>{
-	// Atribute with the size of the Queue
+class CircularQueue<E> {
+	
+	private final static int DEFAULT_SIZE = 32;
     private final int size;
-    //
 	private int first, last, num;
-	//
 	private E[] elements;
 	
 	// Constructor. By default it creates a Queue of 32 elements
-	public Queue() {
-		this(32);
+	public CircularQueue() {
+		this(DEFAULT_SIZE);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Queue(int s) {
-		size = s > 0 ? s : 32;
+	public CircularQueue(int s) {
+		size = s > 0 ? s : DEFAULT_SIZE;
 
 		elements = (E[]) new Object[size]; // Create array of generic objects
 	}
@@ -38,6 +41,7 @@ class Queue<E> implements Iterable<E>{
 		element = elements[first];
 		first = (first + 1) % size;
 		num--;
+		
 		return element;
 	}
 	
@@ -46,14 +50,31 @@ class Queue<E> implements Iterable<E>{
 		return num == 0;
 	}
 	
+	// Returns true if the Queue is full of elements
+	public boolean isFull() {
+		return num == size;
+	}
+	
 	// Count how many elements are at the Queue
 	public int count() {
 		return num;
 	}
 	
-	public Iterator<E> iterator() {
-		return new QueueIterator<E>(this);
+	// Return a String representing the Queue
+	@Override
+	public String toString() {
+		String st = "[";
+		int l = first;
+		
+		for(int i = 0; i < num; i++) {
+			st += elements[l] + " ";
+			l = (l + 1) % size;
+		} for(int i = num ; i < size; i++) st+="- ";
+		
+		st += "]";
+		return st;
 	}
+	
 }
 
 /**
@@ -81,28 +102,5 @@ class FullQueueException extends RuntimeException {
 
 	public FullQueueException(String exception) {
 		super(exception);
-	}
-}
-
-class QueueIterator<E> implements Iterator<E> {
-	Queue<E> queue;
-	int actual, num;
-	
-	public QueueIterator(Queue<E> queue) {
-		this.queue = queue;
-		actual = queue.first;
-		num = queue.num;
-	}
-	
-	public E next() {
-		if(!hasNext()) throw new NoSuchElementException();
-		E r = queue.elements[actual];
-		actual = (actual + 1) % queue.SIZE;
-		num--;
-		return r;
-	}
-	
-	public boolean hasNext() {
-		return num > 0;
 	}
 }

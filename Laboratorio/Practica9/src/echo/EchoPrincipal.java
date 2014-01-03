@@ -24,7 +24,7 @@ public class EchoPrincipal {
         server.setName("SERVER");
         client.setName("CLIENT");
         // Run threads
-        client.run();
-        server.run();
+        client.start();
+        server.start();
     }
 }

@@ -28,8 +28,8 @@ public class Transport {
         this.tx_channel = tx_channel;
         this.rx_channel = rx_channel;
 
-        protocol = new Protocol_Stateless(this);
-        //protocol = new Protocol_StopAndWait(this);
+        //protocol = new Protocol_Stateless(this);
+        protocol = new Protocol_StopAndWait(this);
     }
 
     void start_TX_RX_threads() {
